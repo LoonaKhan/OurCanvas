@@ -39,6 +39,8 @@ async function template(){
 
     // keep the client here. this way we can have multiple calls using client. without worrying if it is open or closed
     const client = new MongoClient(uri)
+    
+    // runs the operation function here -------
 
     // tries to connect and run the operation
     try {
