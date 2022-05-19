@@ -252,13 +252,9 @@ async function getAllTiles() {
 
 }
 
-<<<<<<< Updated upstream
-//template().catch(console.error)
-=======
 
 //createTile({position: [-1,-1], colour: [255,255,255]})
 //updateTile([-1,-1] , {colour: [0,0,1], last_modifier: "lvlonEmperor"})//.catch(console.error)
 //resetTile([-1,-1])
 //deleteTile([-1,-1])
 //console.log(getTile([-1,-1]))
->>>>>>> Stashed changes
