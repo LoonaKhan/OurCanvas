@@ -33,7 +33,7 @@ async function template(){
     * We connect and close the connection with each call is so that we dont ever leave the connection running.
     * Leaving it open may use more resources on both server and the client's ends and may pose a security threat.
     *
-    * Attempts to connect to the db and perform an operation. if it fails, log the error.
+    * Attempts to connect to the backend and perform an operation. if it fails, log the error.
     * And in all cases, close the connection afterward.
     */
 
@@ -204,13 +204,13 @@ async function deleteAll() {
     /*
     * Deletes all tiles.
     *
-    * Essentially clears the db. Only meant to be used in development. not during production
+    * Essentially clears the backend. Only meant to be used in development. not during production
     */
 }
 
 async function getTile(position) {
     /*
-    * Gets a single tile from the db.
+    * Gets a single tile from the backend.
     * */
 
     const client = new MongoClient(uri)
@@ -241,9 +241,9 @@ async function getTile(position) {
 
 async function getAllTiles() {
     /*
-    * Gets all tiles from the db.
+    * Gets all tiles from the backend.
     *
-    * Used very often. meant to load the webpage(and all the tiles in the db) as well as
+    * Used very often. meant to load the webpage(and all the tiles in the backend) as well as
     * reload the page contents(the tiles) every second or so.
     *
     * TODO:
@@ -254,7 +254,7 @@ async function getAllTiles() {
 
 
 //createTile({position: [-1,-1], colour: [255,255,255]})
-//updateTile([-1,-1] , {colour: [0,0,1], last_modifier: "lvlonEmperor"})//.catch(console.error)
+updateTile([-1,-1] , {colour: [0,0,1], last_modifier: "lvlonEmperor"})//.catch(console.error)
 //resetTile([-1,-1])
 //deleteTile([-1,-1])
 //console.log(getTile([-1,-1]))
