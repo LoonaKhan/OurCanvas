@@ -27,11 +27,10 @@ exports.createTile = function (req, res) { // creates a tile.
 }
 
 // creates all tiles.
+// maybe make a seperate function to do this?
 exports.createAllTiles = function (req, res) {}
 
 // updates a tile
-// does not work. does not fail if a non-existant position is entered. instead modifies the first one.
-// look at mongoose docs?
 exports.updateTile = function (req, res) {
 
     // sets the colour
@@ -40,7 +39,7 @@ exports.updateTile = function (req, res) {
         last_modifier: req.body.last_modifier
     }
 
-    Tile.findOneAndUpdate([Number(req.params.positionX),Number(req.params.positionY)],
+    Tile.findOneAndUpdate({position: [Number(req.params.positionX),Number(req.params.positionY)]},
         {$set: updatedFields},
         function (err, tile) {
                 if (err) return next(err)
@@ -48,6 +47,12 @@ exports.updateTile = function (req, res) {
                 console.log(updatedFields)
         })
 }
+
+// resets a tile
+exports.resetTile = function (req, res) {}
+
+// upserts a tile - update or create if non-existent
+exports.upsertTile = function (req, res) {}
 
 // gets a tile by its position
 exports.getTile = function (req, res) {
@@ -57,6 +62,11 @@ exports.getTile = function (req, res) {
     })
 }
 
+// get all tiles in the database
+// maybe not have this and have wasee set up a function to do it himself?
+exports.getAll = function (req, res) {}
+
+// deletes a tile
 exports.deleteTile = function (req, res) {
     Tile.findOneAndDelete([Number(req.params.positionX), Number(req.params.positionY)],
         function (err) {
@@ -64,3 +74,8 @@ exports.deleteTile = function (req, res) {
             res.send("deleted")
         })
 }
+
+// deletes all tiles in the database
+// maybe not have this and have wasee set up a function to do it himself?
+exports.deleteAll = function (req, res){}
+
