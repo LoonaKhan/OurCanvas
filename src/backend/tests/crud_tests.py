@@ -1,5 +1,5 @@
 """
-Http test file.
+CRUD test file.
 
 This tests the api calls and also performs a few macros.
 
