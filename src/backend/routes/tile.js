@@ -8,11 +8,9 @@ const router = express.Router();
 
 // Require the controllers
 const tileController = require('../controllers/tile');
-const {updateTile} = require("../controllers/tile");
+//const {updateTile} = require("../controllers/tile");
 
 
-// a simple test url to check that all of our files are communicating correctly.
-router.get('/test', tileController.test);
 
 // creates a tile
 router.post(`/create`, tileController.createTile)
@@ -21,10 +19,16 @@ router.post(`/create`, tileController.createTile)
 router.get('/:positionX/:positionY', tileController.getTile)
 
 // updates a tile
-router.put('/:positionX/:positionY', tileController.updateTile)
+router.put('/update', tileController.updateTile)
+
+// resets a tile
+router.put('/reset', tileController.resetTile)
+
+// upserts a tile
+//router.put('/:positionX/:positionY/', tileController.upsertTile)
 
 // deletes a tile
-router.delete('/:positionX/:positionY', tileController.deleteTile)
+router.delete('/delete', tileController.deleteTile)
 
 
 
