@@ -1,4 +1,7 @@
 /*
+* [REDUNDANT]
+* ONLY KEPT AS REFERENCE
+* 
 * OurCanvas REST API
 *
 * Contains all CRUD function calls so we can connect to our MongoDB server.
