@@ -1,14 +1,15 @@
 /*
 * The routes.
 *
-* Basically determines what is called based on the url given
+* This details all the dfferent url's and what type of requests and controllers they use.
+*
+* at the end of the file, we export all routes.
 */
 const express = require('express');
 const router = express.Router();
 
-// Require the controllers
+// Require the controllers. this is all the functionality of the backend
 const tileController = require('../controllers/tile');
-//const {updateTile} = require("../controllers/tile");
 
 
 
@@ -16,7 +17,10 @@ const tileController = require('../controllers/tile');
 router.post(`/create`, tileController.createTile)
 
 // gets a tile
-router.get('/:positionX/:positionY', tileController.getTile)
+router.get('/tile', tileController.getTile)
+
+//gets all tiles
+router.get('/', tileController.getAllTiles)
 
 // updates a tile
 router.put('/update', tileController.updateTile)
@@ -24,13 +28,9 @@ router.put('/update', tileController.updateTile)
 // resets a tile
 router.put('/reset', tileController.resetTile)
 
-// upserts a tile
-//router.put('/:positionX/:positionY/', tileController.upsertTile)
-
 // deletes a tile
 router.delete('/delete', tileController.deleteTile)
 
 
 
-
-module.exports = router;
+module.exports = router; // exports the routes

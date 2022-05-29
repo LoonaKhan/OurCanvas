@@ -5,6 +5,11 @@ This tests the api calls and also performs a few macros.
 
 Developer: lvlonEmperor
 Date: 2022/05/28
+
+ISSUES:
+    i cant call multiple api methods here at once. only 1 per run.
+    todo:
+        try making them async?
 """
 import sys
 import requests
@@ -22,23 +27,60 @@ def getTile(position:list[int]):
     empty.
     position be integers and have a length of 2. they are essentially immutable.
     Ex: [x,y] -> [1,1]
-
-    TODO:
-        move params to an array. this way it is not incorporated into the url
     """
     global url
 
     # details about the request
     type = "GET"
-    url += f"/{position[0]}/{position[1]}" # position
-    headers = {"Content-Type": "application/json"}
+    url += f"/tile" # position
+    headers = {}#{"Content-Type": "application/json"}
     params = {} # the params
-    body = {} # the data
+    body = {
+        "position": position
+    } # the data
 
-    res = requests.request(type, url=url, params=params, data=body, headers=headers) # makes the request
+    res = requests.request(method=type, url=url, params=params, data=body, headers=headers) # makes the request
     data = json.loads(res.text) # the response
 
     print(json.dumps(data, indent=4, sort_keys=False)) # pretty-prints the response
+
+    return
+
+def getAllTiles():
+    """
+    GETs all tiles in the db.
+
+    In production we can use this upon page load. we can also use it repeatedly. every 5 seconds or so.
+
+    This was meant to be a macro, but ive made it its own API call, so a seperate function for it is unecessary.
+
+    returns a list of tiles:
+    [
+        {
+            position: [],
+            colour: [],
+            last_modifier: ""
+        },
+        {
+            position: [],
+            colour: [],
+            last_modifier: ""
+        }
+    ]
+    """
+    global url
+
+    # details about the request
+    type = "GET"
+    url += f"/"  # position
+    headers = {}  # {"Content-Type": "application/json"}
+    params = {}  # the params
+    body = {}  # the data
+
+    res = requests.request(method=type, url=url, params=params, data=body, headers=headers)  # makes the request
+    data = json.loads(res.text)  # the response
+
+    print(json.dumps(data, indent=4, sort_keys=False))  # pretty-prints the response
 
     return
 
@@ -87,9 +129,6 @@ def updateTile(position:list[int], colour:list[int], last_modifier:str):
     colour will be the new colour of the tile, in RGB(0,0,0)
     last_modifier is a string value. this will be the username given by the user.
     all arguments are in body.
-
-    TODO:
-        position is in params.
     """
     global url
 
@@ -97,9 +136,7 @@ def updateTile(position:list[int], colour:list[int], last_modifier:str):
     type = "PUT"
     url += f"/update"  # the url
     headers = {}
-    params = {
-        "position": position
-    }  # the params
+    params = {}  # the params
     body = {  # the data used.
         "position": position,
         "colour": colour,
@@ -127,9 +164,6 @@ def deleteTile(position:list[int]):
         >>>position=[0,0]
         >>>deleteTile(position)
         deletes the tile at position [0,0]
-
-    TODO:
-        position is in params.
     """
     global url
 
@@ -137,9 +171,7 @@ def deleteTile(position:list[int]):
     type = "DELETE"
     url += f"/delete"  # the url
     headers = {}
-    params = {
-        "position": position
-    }  # the params
+    params = {}  # the params
     body = {  # the data used.
         "position": position
     }
@@ -162,9 +194,6 @@ def resetTile(position:list[int]):
         >>>position=[0,0]
         >>>resetTile(position)
         sets tile [0,0]'s colour to white.
-
-    TODO:
-        position is in params
     """
     global url
 
@@ -172,9 +201,7 @@ def resetTile(position:list[int]):
     type = "PUT"
     url += f"/reset"  # the url
     headers = {}
-    params = {
-        "position": position
-    }  # the params
+    params = {}  # the params
     body = {  # the data used.
         "position": position
     }
@@ -186,18 +213,24 @@ def resetTile(position:list[int]):
 
     return
 
-def createAll(): pass
-
-def deleteAll(): pass
-
-def getAll(): pass
 
 
+# THESE NEXT FUNCTIONS ARE MACROS.
+# They dont just have API calls, but are a combination of API calls and/or other functionality
+# They are either meant for testing purposes(not in production) and/or a blueprint
+def createAll(): pass # use a for loop to create all of them?
 
-if __name__ == '__main__':
+def deleteAll(): pass # probably could be turned into an API call.
+
+
+
+if __name__ == '__main__': # uncomment each line to test out a feature. only 1 api call at a time tho. async?
     #getTile([2,1])
-    #createTile([0,10], [0,0,0])
-    #updateTile([0,10], [255,255,254], last_modifier="you")
-    #deleteTile([0,10])
-    #resetTile([0,10])
-    sys.exit()
+    #createTile([2,2], [0,0,0])
+    #updateTile([2,1], [25,25,54], last_modifier="you")
+    #deleteTile([2,2])
+    resetTile([2,1])
+    #getAllTiles()
+
+
+    sys.exit() # exits
