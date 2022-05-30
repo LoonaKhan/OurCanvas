@@ -15,7 +15,7 @@ import sys
 import requests
 import json
 
-url = "http://localhost:5000/tiles" # replace this with the server url. for now though, the server is hosted locally
+global_url = "http://localhost:5000/tiles" # replace this with the server url. for now though, the server is hosted locally
 
 def getTile(position:list[int]):
     """
@@ -28,11 +28,10 @@ def getTile(position:list[int]):
     position be integers and have a length of 2. they are essentially immutable.
     Ex: [x,y] -> [1,1]
     """
-    global url
 
     # details about the request
     type = "GET"
-    url += f"/tile" # position
+    url = global_url + f"/tile" # position
     headers = {}#{"Content-Type": "application/json"}
     params = {} # the params
     body = {
@@ -40,6 +39,7 @@ def getTile(position:list[int]):
     } # the data
 
     res = requests.request(method=type, url=url, params=params, data=body, headers=headers) # makes the request
+    print(f"GET TILE  status: {res.status_code}")
     data = json.loads(res.text) # the response
 
     print(json.dumps(data, indent=4, sort_keys=False)) # pretty-prints the response
@@ -68,16 +68,16 @@ def getAllTiles():
         }
     ]
     """
-    global url
 
     # details about the request
     type = "GET"
-    url += f"/"  # position
+    url = global_url + f"/"  # position
     headers = {}  # {"Content-Type": "application/json"}
     params = {}  # the params
     body = {}  # the data
 
     res = requests.request(method=type, url=url, params=params, data=body, headers=headers)  # makes the request
+    print(f"GET ALL TILES  status: {res.status_code}")
     data = json.loads(res.text)  # the response
 
     print(json.dumps(data, indent=4, sort_keys=False))  # pretty-prints the response
@@ -99,11 +99,10 @@ def createTile(position:list[int], colour:list[int]):
         >>>createTile(position)
         creates a tile at position 5,5 and coloured black
     """
-    global url
 
     # details about the request
     type = "POST"
-    url += f"/create"  # the url
+    url = global_url + f"/create"  # the url
     headers = {}
     params = {}  # the params
     body = { # the data used.
@@ -112,6 +111,7 @@ def createTile(position:list[int], colour:list[int]):
     }
 
     res = requests.request(type, url=url, params=params, data=body, headers=headers)  # makes the request
+    print(f"CREATE TILE   status: {res.status_code}")
     data = json.loads(res.text)  # the response
 
     print(json.dumps(data, indent=4, sort_keys=False))  # pretty-prints the response
@@ -130,11 +130,10 @@ def updateTile(position:list[int], colour:list[int], last_modifier:str):
     last_modifier is a string value. this will be the username given by the user.
     all arguments are in body.
     """
-    global url
 
     # details about the request
     type = "PUT"
-    url += f"/update"  # the url
+    url = global_url + f"/update"  # the url
     headers = {}
     params = {}  # the params
     body = {  # the data used.
@@ -144,6 +143,7 @@ def updateTile(position:list[int], colour:list[int], last_modifier:str):
     }
 
     res = requests.request(type, url=url, params=params, data=body, headers=headers)  # makes the request
+    print(f"UPDATE TILE  status: {res.status_code}")
     data = json.loads(res.text)  # the response
 
     print(json.dumps(data, indent=4, sort_keys=False))  # pretty-prints the response
@@ -165,11 +165,10 @@ def deleteTile(position:list[int]):
         >>>deleteTile(position)
         deletes the tile at position [0,0]
     """
-    global url
 
     # details about the request
     type = "DELETE"
-    url += f"/delete"  # the url
+    url = global_url + f"/delete"  # the url
     headers = {}
     params = {}  # the params
     body = {  # the data used.
@@ -177,6 +176,7 @@ def deleteTile(position:list[int]):
     }
 
     res = requests.request(type, url=url, params=params, data=body, headers=headers)  # makes the request
+    print(f"DELETE TILE  status: {res.status_code}")
     data = json.loads(res.text)  # the response
 
     print(json.dumps(data, indent=4, sort_keys=False))  # pretty-prints the response
@@ -195,11 +195,10 @@ def resetTile(position:list[int]):
         >>>resetTile(position)
         sets tile [0,0]'s colour to white.
     """
-    global url
 
     # details about the request
     type = "PUT"
-    url += f"/reset"  # the url
+    url = global_url + f"/reset"  # the url
     headers = {}
     params = {}  # the params
     body = {  # the data used.
@@ -207,6 +206,7 @@ def resetTile(position:list[int]):
     }
 
     res = requests.request(type, url=url, params=params, data=body, headers=headers)  # makes the request
+    print(f"RESET TILE  status: {res.status_code}")
     data = json.loads(res.text)  # the response
 
     print(json.dumps(data, indent=4, sort_keys=False))  # pretty-prints the response
@@ -225,11 +225,11 @@ def deleteAll(): pass # probably could be turned into an API call.
 
 
 if __name__ == '__main__': # uncomment each line to test out a feature. only 1 api call at a time tho. async?
-    #getTile([2,1])
-    #createTile([2,2], [0,0,0])
-    #updateTile([2,1], [25,25,54], last_modifier="you")
-    #deleteTile([2,2])
-    resetTile([2,1])
+    createTile([2, 1], [0, 0, 0])
+    getTile([2,1])
+    updateTile([2,1], [25,25,54], last_modifier="you")
+    resetTile([2, 1])
+    deleteTile([2,1])
     #getAllTiles()
 
 

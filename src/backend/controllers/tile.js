@@ -202,7 +202,7 @@ exports.deleteTile = async (req, res) => {
             res.status(404).json({message: "Tile not found."})
             return
         }
-        res.json(deleted) // otherwise, send the deleted tile
+        res.json({message: `deleted tile at position: [${req.body.position}]`}) // otherwise, send the deleted tile
     } catch (err) {
         res.status(500).json({message: err.message}) // if there is an error, respond with the error
     }

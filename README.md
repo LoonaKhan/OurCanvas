@@ -8,8 +8,6 @@
 - coming soon
 
 ## TODO:
-- Finish the backend. (mon)
-- - asynchronize the backend
 - Frontend. (Wasee)
 - host the backend to a server like heroku (mon)
 - at some point: update the readme to have a more detailed explanation about the webapp (either)
