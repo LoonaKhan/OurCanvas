@@ -1,6 +1,10 @@
 # OurCanvas
  an interactive webapp based on r/place
 
+## Dependencies
+- pip3 install requests
+- npm install react-color --save
+
 ## Description:
 - coming soon
 
