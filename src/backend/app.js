@@ -40,6 +40,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 // the routes we use for tiles. this gives us the url: https://localhost:port/tiles
 app.use('/tiles', tile)
 
-app.listen(port, () => { // listens on the port
+app.listen(process.env.PORT || 5000, () => { // listens on the port
     console.log('Server is up and running on port number ' + port);
 });
