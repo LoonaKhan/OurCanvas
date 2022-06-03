@@ -10,7 +10,7 @@ import sys
 import requests
 import json
 
-global_url = "https://our-canvas.herokuapp.com:5000/tiles" # replace this with the server url. for now though, the server is hosted locally
+global_url = "https://our-canvas.herokuapp.com/tiles" # replace this with the server url. for now though, the server is hosted locally
 
 def getTile(position:list[int]):
     """
@@ -220,9 +220,9 @@ def deleteAll(): pass # probably could be turned into an API call.
 
 
 if __name__ == '__main__': # uncomment each line to test out a feature. only 1 api call at a time tho. async?
-    #getTile([2,1])
+    getTile([2,1])
     #getAllTiles()
-    createTile([2, 1], [0, 0, 0])
+    #createTile([2, 1], [0, 0, 0])
     #updateTile([2,1], [25,25,54], last_modifier="you")
     #resetTile([2, 1])
     #deleteTile([2,1])
