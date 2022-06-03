@@ -4,7 +4,8 @@
   "description": "an interactive webapp based on r/place",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd src/ && node backend/app.js"
   },
   "repository": {
     "type": "git",

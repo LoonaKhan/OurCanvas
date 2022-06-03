@@ -47,6 +47,7 @@ exports.getTile = async (req, res) => {
         const tile = await Tile.findOne({ // searches for a matching tile
             position: [Number(req.body.position[0]), Number(req.body.position[1])]
         })
+        console.log(tile)
         if (tile == null){ // if one is not found, return a 404
             res.status(404).json({message: "Tile not found."})
             return
