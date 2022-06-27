@@ -23,7 +23,7 @@ require('dotenv').config() // loads the dotenv file
 
 
 // connects to mongodb
-const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.g5byo.mongodb.net/?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.g5byo.mongodb.net/db?retryWrites=true&w=majority`
 mongoose.connect(uri)
 mongoose.Promise = global.Promise
 let db = mongoose.connection
