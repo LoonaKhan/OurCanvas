@@ -10,7 +10,11 @@ import sys
 import requests
 import json
 
-global_url = "https://our-canvas.herokuapp.com/tiles" # replace this with the server url. for now though, the server is hosted locally
+# global is where the app is hosted when its deployed.
+# wasee and everyone connecting to the app will use global
+# local is for when mon is testing the server
+global_url = "https://our-canvas.herokuapp.com/tiles"
+local_url = "http://localhost:5000/tiles"
 
 def getTile(position:list[int]):
     """
@@ -220,12 +224,12 @@ def deleteAll(): pass # probably could be turned into an API call.
 
 
 if __name__ == '__main__': # uncomment each line to test out a feature. only 1 api call at a time tho. async?
-    createTile([2, 1], [0, 0, 0])
-    getTile([2,1])
+    createTile([2, 2], [0, 0, 0])
+    #getTile([0,1])
     #getAllTiles()
-    #updateTile([2,1], [25,25,54], last_modifier="you")
+    #updateTile([0,1], [25,25,54], last_modifier="you")
     #resetTile([2, 1])
-    #deleteTile([2,1])
+    #deleteTile([0,1])
 
 
     sys.exit() # exits
